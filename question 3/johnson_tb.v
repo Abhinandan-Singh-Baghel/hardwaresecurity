@@ -2,6 +2,8 @@
 `include "johnson.v"
 
 
+
+
 module johnson_counter_tb;
 
 reg clock;
@@ -14,6 +16,22 @@ johnson_counter dut (
     .reset(reset),
     .counter_state(counter_state)
 );
+
+// Parameters
+parameter SIMULATION_CYCLES = 100; // Adjust this value as needed
+
+
+
+initial begin
+
+     $dumpfile("johnson_counter.vcd");
+    $dumpvars(0, johnson_counter_tb); 
+    
+          
+
+end
+
+
 
 // Clock generation
 initial begin
@@ -33,6 +51,10 @@ end
 // Monitor for observing the counter state changes
 always @(posedge clock) begin
     $display("Counter State: %b", counter_state);
+    
+    // Stop the simulation after SIMULATION_CYCLES clock cycles
+    if ($time >= SIMULATION_CYCLES * 10) // Assuming each clock period is 10 time units
+        $finish;
 end
 
 endmodule

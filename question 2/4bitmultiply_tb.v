@@ -3,7 +3,7 @@
 
 
 
-module testbench;
+module multiplier_4bit_tb;
 
     reg [3:0] A;
     reg [3:0] B;
@@ -16,6 +16,10 @@ module testbench;
     );
 
     initial begin
+
+        $dumpfile("4bit_multiply_tb.vcd");
+        $dumpvars(0, multiplier_4bit_tb);
+
         $display("Testing 4-bit Multiplier");
 
         // Test cases

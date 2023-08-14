@@ -21,12 +21,18 @@ module FullAdder8Bit (
 
     wire [7:0] carry_outs;
 
-    genvar i;
+    genvar i   ;
+
+
+
     generate
-        for (i = 0; i < 8; i = i + 1) begin : gen_full_adders
-            FullAdder1Bit fa (
+        for (i = 0; i < 8  ; i = i + 1  ) begin : gen_full_adders
+            FullAdder1Bit fa ( 
+
                 .A(A[i]),
+
                 .B(B[i]),
+                
                 .Cin(i == 0 ? Cin : carry_outs[i-1]),
                 .Sum(Sum[i]),
                 .Cout(carry_outs[i])
