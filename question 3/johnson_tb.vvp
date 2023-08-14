@@ -1,0 +1,85 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_000002748a46a8d0 .scope module, "johnson_counter_tb" "johnson_counter_tb" 2 5;
+ .timescale -9 -9;
+v000002748a5f67e0_0 .var "clock", 0 0;
+v000002748a5f6880_0 .net "counter_state", 3 0, L_000002748a5f69c0;  1 drivers
+v000002748a5f6920_0 .var "reset", 0 0;
+E_000002748a46c8b0 .event posedge, v000002748a467130_0;
+S_000002748a5f65b0 .scope module, "dut" "johnson_counter" 2 12, 3 1 0, S_000002748a46a8d0;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 1 "clock";
+    .port_info 1 /INPUT 1 "reset";
+    .port_info 2 /OUTPUT 4 "counter_state";
+L_000002748a5f69c0 .functor BUFZ 4, v000002748a46aa60_0, C4<0000>, C4<0000>, C4<0000>;
+v000002748a467130_0 .net "clock", 0 0, v000002748a5f67e0_0;  1 drivers
+v000002748a46aa60_0 .var "counter", 3 0;
+v000002748a469440_0 .net "counter_state", 3 0, L_000002748a5f69c0;  alias, 1 drivers
+v000002748a5f6740_0 .net "reset", 0 0, v000002748a5f6920_0;  1 drivers
+E_000002748a46c370 .event posedge, v000002748a5f6740_0, v000002748a467130_0;
+    .scope S_000002748a5f65b0;
+T_0 ;
+    %wait E_000002748a46c370;
+    %load/vec4 v000002748a5f6740_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %pushi/vec4 0, 0, 4;
+    %assign/vec4 v000002748a46aa60_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v000002748a46aa60_0;
+    %parti/s 3, 0, 2;
+    %load/vec4 v000002748a46aa60_0;
+    %parti/s 1, 3, 3;
+    %inv;
+    %concat/vec4; draw_concat_vec4
+    %assign/vec4 v000002748a46aa60_0, 0;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_000002748a46a8d0;
+T_1 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v000002748a5f67e0_0, 0, 1;
+T_1.0 ;
+    %delay 5, 0;
+    %load/vec4 v000002748a5f67e0_0;
+    %inv;
+    %store/vec4 v000002748a5f67e0_0, 0, 1;
+    %jmp T_1.0;
+    %end;
+    .thread T_1;
+    .scope S_000002748a46a8d0;
+T_2 ;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v000002748a5f6920_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v000002748a5f6920_0, 0, 1;
+    %delay 20, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v000002748a5f6920_0, 0, 1;
+    %delay 30, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v000002748a5f6920_0, 0, 1;
+    %end;
+    .thread T_2;
+    .scope S_000002748a46a8d0;
+T_3 ;
+    %wait E_000002748a46c8b0;
+    %vpi_call 2 35 "$display", "Counter State: %b", v000002748a5f6880_0 {0 0 0};
+    %jmp T_3;
+    .thread T_3;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "johnson_tb.v";
+    "./johnson.v";
